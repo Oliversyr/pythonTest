@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>python测试</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>账号: </td>
+			<td><input type="text" name="" id="count"/></td>
+		</tr>
+		<tr>
+			<td>密码：</td>
+			<td><input type="text" name="" id="pwd"/></td>
+		</tr>
+	</table>
+
+	<button id="submit" onclick="subtest()">提交~~~</button>
+
+	<div id="showResult"></div>
+
+</body>
+
+<script>
+let subtest = function() {
+	let count = document.getElementById('count').value;
+	let pwd = document.getElementById('pwd').value;
+
+	let url = 'http://127.0.0.1:8082/login?count=' + count + '&pwd=' + pwd;
+
+	let obj = new XMLHttpRequest();  // XMLHttpRequest对象用于在后台与服务器交换数据          
+        obj.open('GET', url, true);
+        obj.onreadystatechange = function() {
+            if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) { // readyState == 4说明请求已完成
+                  //从服务器获得数据
+				  console.log(obj.responseText);
+				  document.getElementById('showResult').innerHTML = obj.responseText;
+            }
+        };
+        obj.send();
+}
+
+</script>
+</html>
