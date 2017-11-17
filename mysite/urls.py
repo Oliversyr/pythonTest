@@ -22,9 +22,22 @@ news_urlpatterns = [
 	url(r'^news1/([0-9]{4})/$', firstapp_views.news1)
 ]
 
+print_urlpatterns = [
+    url(r'^templatedef/$', firstapp_views.templatedef),
+    url(r'^printerdef/$', firstapp_views.printerdef),
+    url(r'^templatelist/$', firstapp_views.templatelist),
+    url(r'^printerlist/$', firstapp_views.printerlist)
+]
+
+autocomplete_urlpatterns = [
+    url(r'^customlist/$', firstapp_views.customlist)
+]
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', firstapp_views.login),
+    url(r'^print/', include(print_urlpatterns)),
+    url(r'^autocomplete/', include(autocomplete_urlpatterns)),
     # url(r'^$', firstapp_views.index),
     # url(r'^news/', include(news_urlpatterns)),
     url(r'^$',TemplateView.as_view(template_name="index.html"))

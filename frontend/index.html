@@ -33,7 +33,8 @@ let subtest = function() {
         obj.onreadystatechange = function() {
             if (obj.readyState == 4 && obj.status == 200 || obj.status == 304) { // readyState == 4说明请求已完成
                   //从服务器获得数据
-				  console.log(obj.responseText);
+				  console.log(obj.responseText.length);
+				  
 				  document.getElementById('showResult').innerHTML = obj.responseText;
             }
         };
