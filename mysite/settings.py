@@ -56,7 +56,7 @@ ROOT_URLCONF = 'mysite.urls'
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-    'localhost:8085',
+    'localhost:8010',
     'localhost:8082',
     '127.0.0.1:8085'
 )

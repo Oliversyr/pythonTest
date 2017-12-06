@@ -175,7 +175,7 @@ def printerlist(request):
     return HttpResponse(json.dumps(res, ensure_ascii=False));	
 
 def customlist(request):
-    with open('frontend/static/custom.json', 'r', encoding='UTF-8') as file:
+    with open('frontend/static/custom1.json', 'r', encoding='UTF-8') as file:
         alldata = json.loads(file.read())
 
     if(request.method == 'POST'):
@@ -185,9 +185,9 @@ def customlist(request):
         print(type(request.POST.get('pageNum')))
         newlist = []
         if(request.POST.get('pageNum') == '1'):
-            newlist = alldata['items1']
+            newlist = alldata['item1']
         elif(request.POST.get('pageNum') == '2'):
-            newlist = alldata['items2']    
+            newlist = alldata['item2']    
         # for custom in clist:
         #     if(keyVal in custom['ename'] or keyVal in str(custom['coeid'])):
         #         newlist.append(custom)
@@ -196,12 +196,34 @@ def customlist(request):
     # print(keyVal)
 
     res = {
-        'retCode': 'SUCCESS',
+        'retCode': 0,
         'retMsg': '操作成功',
         'pageNum': 1 if(len(newlist) == 10) else(2),
         'pageSize': 10,
         'result': newlist,
-        'totalrecord': 18
+        'totalrecord': 19
     }
     return HttpResponse(json.dumps(res, ensure_ascii=False))
+
+
+import pymysql  
+
+connect = pymysql.Connect(
+    host = 'localhost',
+    port = 3306,
+    user = 'root',
+    password = '123456',
+    db = 'mytable1',
+    charset = 'utf8'
+)
+
+cursor = connect.cursor()
+
+sql = "SELECT * FROM tb2"
+cursor.execute(sql)
+connect.commit()
+print(cursor.fetchall())
+print(cursor.rowcount)
+for row in cursor.fetchall():
+    print("132", row)
 
