@@ -219,11 +219,29 @@ connect = pymysql.Connect(
 
 cursor = connect.cursor()
 
-sql = "SELECT * FROM tb2"
-cursor.execute(sql)
-connect.commit()
-print(cursor.fetchall())
-print(cursor.rowcount)
-for row in cursor.fetchall():
-    print("132", row)
+sql = "SELECT * FROM tb3; INSERT INTO tb2(id, name, age) VALUES(2, 'sfd', 25)"
 
+# cursor.execute(sql)
+# connect.commit()
+# print('123==', cursor.fetchall())
+# print('234==', cursor.rowcount)
+# mydata1 = cursor.fetchall()
+# mydata2 = list(mydata1)
+# print(mydata1)
+# for row in mydata2:
+    # print("13222===", row)
+
+import xlrd
+data = xlrd.open_workbook(r'frontend/testsql.xlsx')
+
+table = data.sheets()[0]
+
+nrows = table.nrows #行数
+
+ncols = table.ncols #列数
+
+for i in range(0,nrows):
+    rowValues= table.row_values(i) #某一行数据 
+    print(i, '==', rowValues)
+# 　　for item in rowValues:
+# 　　　　print item　　　　　　 　　　　
